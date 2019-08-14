@@ -1,0 +1,45 @@
+<!-- 190812 리액트 강좌 1 -->
+
+<!-- * 리액트를 사용하는 이유 
+1. 사용자경험 UX (웹을 앱처럼 사용가능 - 로딩속도 빠름)
+2. 재사용 컴포넌트(중복요소를 하나로 묶어서 사용하기 때문에 유지보수 하기 좋다)
+3. 데이터 - 화면 일치(수많은 데이터를 처리하기에 유용)
+
+* 웹팩
+: 리액트를 html 이 실행할 수 있는 자바스크립트로 합쳐준다.
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://unpkg.com/react@16/umd/react.development.js"></script> <!-- 배포할 땐 developement 대신 production -->
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/javascript">
+		const e = React.createElement;
+
+		class LikeButton extends React.Component {
+			constructor(props){
+				super(props);
+				this.state ={
+					liked : false,
+				}
+			}
+			render(){
+				//태그만들기
+				return e('button', {onClick : () => {this.setState({ liked : true})}, type : 'submit'}, 
+					this.state.liked === true ? 'Liked' : 'Like');  //초기 리액트 - 매우 길고 보기 안좋다.. >> 나중에 바뀐버전!!
+				//가운데 : HTML 속성을 넣는 자리 (객체 형식으로 표현) 
+				//"상태(state)" : 로 바뀔 수 있는 부분 (ex. like 를 누르면 liked 가 된다.)
+				//결과 : <button onclick="() => {console.log('clicked')" type="submit">Like</button> 버튼이라는 태그를 그리겠다.(계획!)
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		ReactDOM.render(e(LikeButton), document.querySelector('#root')); // 버튼이라는 태그를 화면에 그린다.(실행!)
+	</script>
+</body>
+</html>
